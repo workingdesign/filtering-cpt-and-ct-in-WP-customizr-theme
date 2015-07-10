@@ -64,6 +64,9 @@ function print_page_title(){
                                 'reports'           => $term->slug,
                                 'post_status'       => 'publish',
                                 'posts_per_page'    => 2,   //show n posts
+                                //'taxonomy'          => 'publication-types',
+                                //'term'              => $term->slug,
+                                //'term'              => 'reports',
                                 //'cat'               => 77, //include this category from the posts list
                                 //'tag_id'            => '77',
                                 //'tag'               => 'reports',
