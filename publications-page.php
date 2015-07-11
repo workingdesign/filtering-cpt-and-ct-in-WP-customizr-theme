@@ -50,9 +50,10 @@ function print_page_title(){
 
                     <?php do_action ('__before_loop'); ##hooks the heading of the list of post : archive, search... ?>
 
-                        <!-- custom loop 1 -->
+                        <!-- custom loop -->
                         <?php 
-                            add_filter('tc_show_post_metas', '__return_true');
+                            add_filter('tc_show_post_metas', '__return_true'); //this applies only to Customizr theme
+
                             global $wp_query, $wp_the_query;
 
                             $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
@@ -60,17 +61,16 @@ function print_page_title(){
                             $wp_query = new WP_Query( array(
                                 'paged'             => get_query_var('paged') ? get_query_var('paged') : 1,
                                 'post_type'         => 'publication',
-                                'publication-types' => $term->taxonomy,
-                                'reports'           => $term->slug,
+                                'tax_query' => array(   //https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters
+                                                     array(
+                                                        'taxonomy' => 'publication-types',
+                                                        'field'    => 'slug',
+                                                        'terms'    => 'reports',
+                                                        )
+                                                    ),
                                 'post_status'       => 'publish',
                                 'posts_per_page'    => 2,   //show n posts
                                 //'cat'               => 77, //include this category from the posts list
-                                //'tag_id'            => '77',
-                                //'tag'               => 'reports',
-                                //'page_name'         => 'publication-s',
-                                //'taxonomy'          => 'publication-types',
-                                //'category_name'     => 'reports',
-                                //'page_name'         => 'publication-types/reports',
                                 //others parameters here: http://codex.wordpress.org/Class_Reference/WP_Query#Parameters
                             ) );
                         ?>
@@ -110,17 +110,25 @@ function print_page_title(){
 
                         <!-- custom loop 2 -->
                         <?php 
-                            add_filter('tc_show_post_metas', '__return_true');
+                            add_filter('tc_show_post_metas', '__return_true'); //this applies only to Customizr theme
+
                             global $wp_query, $wp_the_query;
+
+                            $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 
                             $wp_query = new WP_Query( array(
                                 'paged'             => get_query_var('paged') ? get_query_var('paged') : 1,
                                 'post_type'         => 'publication',
+                                'tax_query' => array(   //https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters
+                                                     array(
+                                                        'taxonomy' => 'publication-types',
+                                                        'field'    => 'slug',
+                                                        'terms'    => 'letters',
+                                                        )
+                                                    ),
                                 'post_status'       => 'publish',
                                 'posts_per_page'    => 2,   //show n posts
-                                'cat'               => -77, //include this category from the posts list
-                                //'page_name'       => 'publication-s',
-                                //'taxonomy'        => 'publication-types/reports',
+                                //'cat'               => 77, //include this category from the posts list
                                 //others parameters here: http://codex.wordpress.org/Class_Reference/WP_Query#Parameters
                             ) );
                         ?>
