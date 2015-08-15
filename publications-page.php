@@ -63,9 +63,9 @@ function print_page_title(){
                                 'post_type'         => 'publication',
                                 'tax_query' => array(   //https://codex.wordpress.org/Class_Reference/WP_Query#Taxonomy_Parameters
                                                      array(
-                                                        'taxonomy' => 'publication-types',   //'custom-taxonomy-name'
-                                                        'field'    => 'slug',               //it is what it is: 'slug'
-                                                        'terms'    => 'reports',            //'custom-slug-name'
+                                                        'taxonomy' => 'publication-types',   // 'custom-taxonomy-name'
+                                                        'field'    => 'slug',                // it is what it is: 'slug'
+                                                        'terms'    => 'reports',             // 'custom-slug-name'
                                                         )
                                                     ),
                                 'post_status'       => 'publish',
